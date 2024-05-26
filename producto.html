@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-205HXP6ZKV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-205HXP6ZKV');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de producto, Vinilando el mejro contenido.</title>
+    <link rel="stylesheet" href="estilos/producto.css">
+    <script src="https://kit.fontawesome.com/e02ff19eaa.js" crossorigin="anonymous"></script>
+    <title>Vinilando</title>
+    <meta name="description"
+        content="Gorras, sombreros, gorros perfectos para tener un estilo perfecto, para protegerte de los rayos del sol y para que sesas Cap-tivante.">
+    <meta name="keywords" content="sombreros, gorras, cachuchas, gorros" />
+    <meta name="author" content="Steven Quezada González, 
+    Kevin Iván Ramirez Chairez,
+    Diego Sebastian Medina Zarate,
+    Brayan Ariel Flores De Lira,
+    Leonardo Jesus Gutierrez Muñoz," />
+    <meta name="robots" content="index" />
+
+</head>
+
+<body>
+    <header>
+        <div class="container3">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="imagenes/icono.png" alt="Logo de la tienda" title="Logo tienda sombrero">
+                </div>
+                <ul class="menu">
+                    <li><a href="index.html" title="Inicio Cap-tivante">Inicio</a></li>
+                    <li><a href="index.html" title="Gorras Cap-tivante">Vinilos</a></li>
+                    <li><a href="carrito.html" title="SombrerosCap-tivante">Carrito</a></li>
+                </ul>
+                <form action="/search">
+                </form>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container2 product-container">
+        <h1>Detalles del Producto</h1>
+        <div class="product-details-container">
+            <div class="product-image">
+            </div>
+            <div class="product-details">
+            </div>
+        </div>
+    </div>
+
+    <div class="container2 product-container">
+        <div class="quantity-container">
+            <label for="quantity">Cantidad:</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1">
+            <button onclick="addToCart()">Agregar al carrito</button>
+        </div>
+    </div>
+
+    <script>
+        function getUrlParameter(name) {
+            name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+
+        const nombre = getUrlParameter('nombre');
+        const imagen = getUrlParameter('imagen');
+        const precio = getUrlParameter('precio');
+        const descripcion = getUrlParameter('descripcion');
+
+        const productImageContainer = document.querySelector('.product-image');
+        productImageContainer.innerHTML = `
+        <img src="${imagen}" alt="${nombre}" title="${nombre}">
+    `;
+
+        const productDetailsContainer = document.querySelector('.product-details');
+        productDetailsContainer.innerHTML = `
+        <h2>${nombre}</h2>
+        <p><strong>Precio: ${precio}</strong></p>
+        <p><strong>Descripción:</strong> ${descripcion}</p>
+    `;
+
+        function addToCart() {
+            const quantity = document.getElementById('quantity').value;
+
+            // Crear un objeto que represente el producto agregado
+            const product = {
+                nombre: nombre,
+                imagen: imagen,
+                precio: precio,
+                descripcion: descripcion,
+                cantidad: quantity
+            };
+
+            // Obtener la lista de productos en el carrito del localStorage o inicializarla si no existe
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Agregar el producto al carrito
+            cart.push(product);
+
+            // Guardar la lista actualizada de productos en el carrito en el localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            const alertMessage = `¡Producto añadido al carrito!\n\nNombre: ${nombre}\nPrecio: ${precio}\nDescripción: ${descripcion}\nCantidad: ${quantity}`;
+
+            // Mostrar una alerta con los datos del producto añadido al carrito
+            alert(alertMessage);
+
+        }
+    </script>
+
+  
+    <script>
+        document.getElementById("reviewForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evitar que se envíe el formulario
+
+            // Obtener los datos del formulario
+            const name = document.getElementById("name").value;
+            const rating = document.getElementById("rating").value;
+            const review = document.getElementById("review").value;
+
+            // Crear un elemento de lista para mostrar la reseña
+            const reviewItem = document.createElement("li");
+            reviewItem.innerHTML = `<strong>${name}</strong> - Calificación: ${rating}<br>${review}`;
+
+            // Agregar la reseña a la lista de reseñas
+            document.getElementById("reviewsList").appendChild(reviewItem);
+
+            // Limpiar el formulario después de enviar la reseña
+            document.getElementById("name").value = "";
+            document.getElementById("rating").value = "";
+            document.getElementById("review").value = "";
+        });
+    </script>
+
+    <footer style="background-color: #fff; color: #a5a4a4; padding: 60px;">
+        <div style="text-align: center;">
+            <h3>Contacto</h3>
+            <p>¡Estamos aquí para ayudarte! Contáctanos para cualquier consulta o inquietud.</p>
+            <p>Email: quezadasteven@gmail.com</p>
+            <p>Teléfono: +123456789</p>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <h3>Síguenos en redes sociales</h3>
+            <a href="https://www.facebook.com/profile.php?id=61557315856153" target="_blank"
+                style="color: #a5a4a4; text-decoration: none; margin-right: 10px;">Facebook</a>
+            <a href="#" style="color: #a5a4a4; text-decoration: none; margin-right: 10px;">Instagram</a>
+            <a href="#" style="color: #a5a4a4; text-decoration: none; margin-right: 10px;">Twitter</a>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <p>&copy; 2024 Tu Tienda de Vinilos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script>
+        if (localStorage.getItem("usuario") === null) {
+            // No hay sesión iniciada, no mostrar el nombre de usuario, el enlace "Cerrar sesión" y el enlace "Iniciar sesión"
+            document.getElementById("username").style.display = "none";
+            document.getElementById("logout-link").style.display = "none";
+            document.getElementById("login-link").style.display = "block"; // Mostrar el enlace "Iniciar sesión"
+        } else {
+            // Hay sesión iniciada, mostrar el nombre de usuario y el enlace "Cerrar sesión", y ocultar el enlace "Iniciar sesión"
+            document.getElementById("username").innerHTML = `<a href="usuario.html">${localStorage.getItem("usuario")}</a>`;
+            document.getElementById("logout-link").style.display = "inline";
+            document.getElementById("login-link").style.display = "none"; // Ocultar el enlace "Iniciar sesión"
+        }
+        function logout() {
+            // Limpiar la información de sesión
+            localStorage.removeItem("usuario"); // Eliminar el nombre de usuario del almacenamiento local
+            localStorage.removeItem("rol");
+
+            // Redireccionar al usuario a la página de inicio de sesión o a una página no autenticada
+            window.location.href = "index.html";
+        }
+    </script>
+
+    <script>
+        function addToWishlist() {
+            // Obtener los datos del producto
+            const nombre = getUrlParameter('nombre');
+            const imagen = getUrlParameter('imagen');
+            const precio = getUrlParameter('precio');
+            const descripcion = getUrlParameter('descripcion');
+
+            // Crear un objeto que represente el producto añadido a la lista de deseos
+            const product = {
+                nombre: nombre,
+                imagen: imagen,
+                precio: precio,
+                descripcion: descripcion
+            };
+
+            // Obtener la lista de productos en la lista de deseos del localStorage o inicializarla si no existe
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+            // Agregar el producto a la lista de deseos
+            wishlist.push(product);
+
+            // Guardar la lista actualizada de productos en la lista de deseos en el localStorage
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+
+            // Mostrar una alerta con los detalles del producto añadido a la lista de deseos
+            const alertMessage = `¡Producto añadido a la lista de deseos!\n\nNombre: ${nombre}\nPrecio: ${precio}\nDescripción: ${descripcion}`;
+            alert(alertMessage);
+        }
+    </script>
+
+</body>
+
+</html>

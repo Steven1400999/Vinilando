@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de compras</title>
+    <link rel="stylesheet" href="estilos/carrito.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos CSS personalizados */
+        /* Puedes pegar aquí los estilos CSS proporcionados si deseas mantenerlos en línea */
+    </style>
+</head>
+
+<body>
+    <header>
+
+        <div class="container3">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="imagenes/icono.png" alt="Logo de la tienda" title="Logo tienda sombrero">
+                </div>
+                <ul class="menu">
+                    <li><a href="index.html" title="Inicio Cap-tivante">Inicio</a></li>
+                    <li><a href="index.html" title="Gorras Cap-tivante">Vinilos</a></li>
+                    <li><a href="carrito.html" title="SombrerosCap-tivante">Carrito</a></li>
+                </ul>
+                <form action="/search">
+                    <input type="text" name="q" placeholder="Buscar">
+                    <button type="submit" class="button2">Buscar</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+
+    <h1>Carrito de Compras</h1>
+
+    <div id="cart-items" class="container">
+        <!-- Contenedor de las cards -->
+        <!-- Aquí se mostrarán los productos en el carrito -->
+    </div>
+
+    <!-- Script para mostrar productos en el carrito -->
+    <script>
+        // Obtener la lista de productos en el carrito del localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Obtener el contenedor donde se mostrarán los productos en el carrito
+        const cartItemsContainer = document.getElementById('cart-items');
+
+        // Verificar si hay productos en el carrito
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p>No hay productos en el carrito.</p>';
+        } else {
+            // Iterar sobre la lista de productos en el carrito y mostrarlos en la página
+            cart.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('product-card');
+                productElement.innerHTML = `
+                    <div>
+                        <img src="${product.imagen}" alt="${product.nombre}">
+                        <div>
+                            <h2>${product.nombre}</h2>
+                            <p>Precio: ${product.precio}</p>
+                            <p>Cantidad: ${product.cantidad}</p>
+                            <p>Descripción: ${product.descripcion}</p>
+                            <button onclick="removeFromCart(${cart.indexOf(product)})" class="remove-button">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(productElement);
+            });
+        }
+
+        function removeFromCart(index) {
+            // Obtener la lista de productos en el carrito del localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Eliminar el producto del carrito en el índice dado
+            cart.splice(index, 1);
+
+            // Actualizar el carrito en el localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Recargar pagina para la visualizacion de cambios realizados
+            location.reload();
+        }
+    </script>
+
+    <!-- Script de PayPal -->
+    <script src="https://www.paypal.com/sdk/js?client-id=ASWrbEqyHmNdmVlW7sYguAVhwEzMwZ6jDJuy3aHeYCrgFyoqcqMriTMneMYJUS6nR7qUBU4Ks2SjiIvq&currency=MXN"></script>
+    <script>
+        function calcularPrecioTotal() {
+            // Obtener la lista de productos en el carrito del localStorage
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Calcular el precio total sumando los precios individuales de cada producto en el carrito
+            const totalPrice = cart.reduce((total, product) => total + (parseFloat(product.precio) * parseInt(product.cantidad)), 0);
+
+            // Actualizar el botón de PayPal con el nuevo precio
+            paypal.Buttons({
+                style: {
+                    color: 'blue',
+                    shape: 'pill'
+                },
+                createOrder: function(data, actions) {
+                    // Crear la orden de compra con el precio total calculado
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: totalPrice.toFixed(2) // Redondear el precio total a 2 decimales
+                            }
+                        }]
+                    });
+                }
+            }).render('#paypal-button-container');
+        }
+
+        // Llamar a la función para calcular el precio total cuando se carga la página
+        calcularPrecioTotal();
+    </script>
+
+    <!-- Contenedor del botón de PayPal -->
+    <div id="paypal-button-container"></div>
+
+    <footer style="background-color:  #fff; color:  #a5a4a4; padding: 60px; margin-right: 100px;">
+        <div style="text-align: center;">
+            <h3>Contacto</h3>
+            <p>¡Estamos aquí para ayudarte! Contáctanos para cualquier consulta o inquietud.</p>
+            <p>Email: info@tu-tienda.com</p>
+            <p>Teléfono: +52 449 12345678</p>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <h3>Síguenos en redes sociales</h3>
+            <a href="https://www.facebook.com/profile.php?id=61557315856153" target="_blank"
+                style="color: #a5a4a4; text-decoration: none; margin-right: 10px;">Facebook</a>
+            <a href="#" style="color:  #a5a4a4; text-decoration: none; margin-right: 10px;">Instagram</a>
+            <a href="#" style="color: #a5a4a4; text-decoration: none; margin-right: 10px;">Twitter</a>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <p>&copy; 2024 Cap-tivante. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+ if (localStorage.getItem("usuario") === null) {
+    // No hay sesión iniciada, no mostrar el nombre de usuario, el enlace "Cerrar sesión" y el enlace "Iniciar sesión"
+    document.getElementById("username").style.display = "none";
+    document.getElementById("logout-link").style.display = "none";
+    document.getElementById("login-link").style.display = "block"; // Mostrar el enlace "Iniciar sesión"
+} else {
+    // Hay sesión iniciada, mostrar el nombre de usuario y el enlace "Cerrar sesión", y ocultar el enlace "Iniciar sesión"
+    document.getElementById("username").innerHTML = `<a href="usuario.html">${localStorage.getItem("usuario")}</a>`;
+    document.getElementById("logout-link").style.display = "inline";
+    document.getElementById("login-link").style.display = "none"; // Ocultar el enlace "Iniciar sesión"
+}
+  function logout() {
+    // Limpiar la información de sesión
+    localStorage.removeItem("usuario"); // Eliminar el nombre de usuario del almacenamiento local
+    localStorage.removeItem("rol");
+
+    // Redireccionar al usuario a la página de inicio de sesión o a una página no autenticada
+    window.location.href = "index.html";
+    alert("sesion cerrada!");
+}
+      </script>
+</body>
+
+</html>

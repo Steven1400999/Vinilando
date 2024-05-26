@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-205HXP6ZKV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-205HXP6ZKV');
+  </script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinilando vinilos</title>
+
+
+
+
+  <link rel="stylesheet" href="estilos/index.css">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+  
+    <div class="container3">
+      <nav class="navbar">
+        <div class="logo">
+          <img src="imagenes/icono.png" alt="Logo de la tienda" title="Logo">
+        </div>
+        <ul class="menu">
+          <li><a href="index.html" title="Inicio Cap-tivante">Inicio</a></li>
+          <li><a href="index.html" title="Gorras Cap-tivante">Vinilos</a></li>
+          <li><a href="carrito.html" title="SombrerosCap-tivante">Carrito</a></li>
+        </ul>
+        <form id="search-form">
+          <input type="text" id="search-input" placeholder="Buscar">
+          <button type="submit">Buscar</button>
+        </form>
+      </nav>
+    </div>
+  </header>
+
+ 
+  
+    <h1 class="store-title">Bienvenido a Vinilando</h1>
+    <button id="sort-name-button" style="display: none;">Ordenar A-Z</button>
+    <button id="sort-reverse-name-button" style="display: none;">Ordenar Z-A</button>
+    <button id="sort-price-button" style="display: none;">Ordenar Precio (Menor a Mayor)</button> <!-- Nuevo botón -->
+    <button id="sort-price-reverse-button" style="display: none;">Ordenar Precio (Mayor a Menor)</button> <!-- Nuevo botón -->
+    <div class="products-container" id="products-container">
+      <!-- Aquí se mostrarán los productos -->
+    </div>
+
+  <!-- Script para la funcionalidad de búsqueda -->
+  <script>
+    // Get the search form, input, and products container elements
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const productsContainer = document.getElementById('products-container');
+    const sortButton = document.getElementById('sort-name-button');
+    const reverseSortButton = document.getElementById('sort-reverse-name-button');
+    const priceSortButton = document.getElementById('sort-price-button'); // Nuevo botón
+    const priceSortReverseButton = document.getElementById('sort-price-reverse-button'); // Nuevo botón
+    const carousel = document.getElementById('carouselExampleIndicators');
+
+    // Function to create a product element
+    function createProductElement(product) {
+      const productWrapper = document.createElement('div');
+      productWrapper.classList.add('product-wrapper');
+
+      const productElement = document.createElement('a');
+    
+      productElement.classList.add('product');
+      productElement.href = `producto.html?nombre=${encodeURIComponent(product.nombre)}&imagen=${encodeURIComponent(product.imagen)}&precio=${encodeURIComponent(product.precio)}&descripcion=${encodeURIComponent(product.descripcion)}`;
+      productElement.title = product.nombre;
+      productElement.innerHTML = `
+        <div class="product-image">
+          <img src="${product.imagen}" alt="${product.nombre}" title="${product.nombre}">
+        </div>
+        <div class="product-info">
+          <h2>${product.nombre}</h2>
+          <h2>${product.categoria}</h2>
+          <p class="price">$${product.precio}</p>
+          <button class="buy-button">Ver producto</button>
+        </div>
+      `;
+
+      productWrapper.appendChild(productElement);
+      return productWrapper;
+    }
+
+    // Fetch products from JSON file
+    fetch('productos.json')
+      .then(response => response.json())
+      .then(data => {
+        // Display all products initially
+        data.forEach(product => {
+          const productElement = createProductElement(product);
+          productsContainer.appendChild(productElement);
+        });
+      })
+      .catch(error => console.error('Error al cargar los datos de los productos:', error));
+
+    // Add event listener to the search form
+    searchForm.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the search term
+      const searchTerm = searchInput.value.trim().toLowerCase();
+
+      // Filter products based on the search term
+      const filteredProducts = Array.from(productsContainer.children).filter(product => {
+        const productName = product.querySelector('.product-info h2').textContent.toLowerCase();
+        return productName.includes(searchTerm);
+      });
+
+      // Show or hide products based on the search results
+      Array.from(productsContainer.children).forEach(product => {
+        if (filteredProducts.includes(product)) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+
+      // Change the title text based on search results
+      const titleText = filteredProducts.length > 0 ? 'Resultados de búsqueda' : 'Bienvenido a Cap-tivante';
+      document.querySelector('.store-title').textContent = titleText;
+
+      // Show or hide the sort buttons based on search results
+   
+
+      if (filteredProducts.length > 0) {
+        sortButton.style.display = 'inline-block';
+        reverseSortButton.style.display = 'inline-block';
+        priceSortButton.style.display = 'inline-block';
+        priceSortReverseButton.style.display = 'inline-block';
+        // Hide the carousel
+        carousel.classList.add('hidden');
+      } else {
+        sortButton.style.display = 'none';
+        reverseSortButton.style.display = 'none';
+        priceSortButton.style.display = 'none';
+        priceSortReverseButton.style.display = 'none';
+        // Show the carousel
+        carousel.classList.remove('hidden');
+      }
+    });
+
+    // Add event listener to the sort button
+    sortButton.addEventListener('click', function () {
+      const sortedProducts = Array.from(productsContainer.children)
+        .sort((a, b) => {
+          const nameA = a.querySelector('.product-info h2').textContent.toLowerCase();
+          const nameB = b.querySelector('.product-info h2').textContent.toLowerCase();
+          return nameA.localeCompare(nameB);
+        });
+
+      productsContainer.innerHTML = '';
+      sortedProducts.forEach(product => {
+        productsContainer.appendChild(product);
+      });
+    });
+
+    // Add event listener to the reverse sort button
+    reverseSortButton.addEventListener('click', function () {
+      const sortedProducts = Array.from(productsContainer.children)
+        .sort((a, b) => {
+          const nameA = a.querySelector('.product-info h2').textContent.toLowerCase();
+          const nameB = b.querySelector('.product-info h2').textContent.toLowerCase();
+          return nameB.localeCompare(nameA);
+        });
+
+      productsContainer.innerHTML = '';
+      sortedProducts.forEach(product => {
+        productsContainer.appendChild(product);
+      });
+    });
+
+    // Add event listener to the price sort button
+    priceSortButton.addEventListener('click', function () {
+      const sortedProducts = Array.from(productsContainer.children)
+        .sort((a, b) => {
+          const priceA = parseFloat(a.querySelector('.price').textContent.replace('$', ''));
+          const priceB = parseFloat(b.querySelector('.price').textContent.replace('$', ''));
+          return priceA - priceB;
+        });
+
+      productsContainer.innerHTML = '';
+      sortedProducts.forEach(product => {
+        productsContainer.appendChild(product);
+      });
+    });
+
+    // Add event listener to the price reverse sort button
+    priceSortReverseButton.addEventListener('click', function () {
+      const sortedProducts = Array.from(productsContainer.children)
+        .sort((a, b) => {
+          const priceA = parseFloat(a.querySelector('.price').textContent.replace('$', ''));
+          const priceB = parseFloat(b.querySelector('.price').textContent.replace('$', ''));
+          return priceB - priceA;
+        });
+
+      productsContainer.innerHTML = '';
+      sortedProducts.forEach(product => {
+        productsContainer.appendChild(product);
+      });
+    });
+    function addToCart() {
+    const quantity = document.getElementById('quantity').value;
+    const product = { nombre: nombre, imagen: imagen, precio: precio, descripcion: descripcion, cantidad: quantity };
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`Producto añadido al carrito correctamente.`);
+}
+  </script>
+
+<footer style="background-color: #fff; color: #a5a4a4; padding: 60px; width: 100vw; position: absolute; left: 0; right: 0;">
+    <div style="text-align: center;">
+      <h3>Contacto</h3>
+      <p>¡Estamos aquí para ayudarte! Contáctanos para cualquier consulta o inquietud.</p>
+      <p>Email: info@tu-tienda.com</p>
+      <p>Teléfono: +52 449 12345678</p>
+    </div>
+    <div style="text-align: center; margin-top: 40px;">
+      <h3>Síguenos en redes sociales</h3>
+      <a href="https://www.facebook.com/profile.php?id=61557315856153" target="_blank" style="color: #a5a4a4; text-decoration: none; margin-right: 10px;">Facebook</a>
+      <a href="#" style="color: #a5a4a4; text-decoration: none; margin-right: 10px;">Instagram</a>
+      <a href="#" style="color: #a5a4a4; text-decoration: none; margin-right: 10px;">Twitter</a>
+    </div>
+    <div style="text-align: center; margin-top: 40px;">
+      <p>&copy; 2024 Vinilando. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="modal fade" id="cookieModal" tabindex="-1" role="dialog" aria-labelledby="cookieModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cookieModalLabel">Aviso Legal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h6><strong>Política de Cookies:</strong></h6>
+          <p>Utilizamos cookies para personalizar contenido y anuncios, proporcionar funciones de redes sociales y analizar nuestro tráfico. También compartimos información sobre su uso de nuestro sitio con nuestros socios de redes sociales, publicidad y análisis. Al continuar utilizando nuestro sitio, acepta el uso de cookies.</p>
+          <hr>
+          <h6><strong>Política de Privacidad:</strong></h6>
+          <p>Valoramos su privacidad y nos comprometemos a proteger su información personal. Los datos recopilados a través de este sitio web serán utilizados exclusivamente para los fines especificados y no serán compartidos con terceros sin su consentimiento, salvo cuando sea requerido por ley.</p>
+          <hr>
+          <h6><strong>Seguridad de las Tarjetas de Crédito:</strong></h6>
+          <p>La seguridad de sus transacciones es fundamental para nosotros. Empleamos tecnologías avanzadas de cifrado y protocolos de seguridad para garantizar que su información de tarjeta de crédito esté protegida durante el proceso de compra. No almacenamos detalles de su tarjeta de crédito después de completar la transacción.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#cookieModal').modal('show');
+    });
+  </script>
+
+<script>
+if (localStorage.getItem("usuario") === null) {
+    // No hay sesión iniciada, no mostrar el nombre de usuario, el enlace "Cerrar sesión" y el enlace "Iniciar sesión"
+    document.getElementById("username").style.display = "none";
+    document.getElementById("logout-link").style.display = "none";
+    document.getElementById("login-link").style.display = "block"; // Mostrar el enlace "Iniciar sesión"
+} else {
+    // Hay sesión iniciada, mostrar el nombre de usuario y el enlace "Cerrar sesión", y ocultar el enlace "Iniciar sesión"
+    document.getElementById("username").innerHTML = `<a href="usuario.html">${localStorage.getItem("usuario")}</a>`;
+    document.getElementById("logout-link").style.display = "inline";
+    document.getElementById("login-link").style.display = "none"; // Ocultar el enlace "Iniciar sesión"
+}
+
+if (localStorage.getItem("rol") === "Administrador") {
+    document.querySelector('a[title="Administrar productos"]').style.display = "block"; // Mostrar para administradores
+} else {
+    document.querySelector('a[title="Administrar productos"]').style.display = "none"; // Ocultar para clientes
+}
+
+  function logout() {
+    // Limpiado de inicio de sesión
+    localStorage.removeItem("usuario"); // Eliminar el nombre de usuario del almacenamiento local
+    localStorage.removeItem("rol");
+    // Redireccionar al usuario a la página de inicio de sesión o a una página no autenticada
+    window.location.href = "index.html";
+    alert("sesion cerrada!");
+}
+</script>
+
+</body>
+
+</html>

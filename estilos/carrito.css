@@ -1,0 +1,142 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f8f8; 
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: left;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff; 
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+    border-radius: 5%;
+}
+
+.logo img {
+    width: 20%;
+    height: auto;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #ff4d4d;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #000000; 
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.menu li a:hover {
+    color: #ccc; 
+}
+
+.product-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.product-card img {
+    width: 100px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.product-card h2 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.product-card p {
+    color: #555;
+}
+
+.product-card .remove-button {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product-card .remove-button:hover {
+    background-color: #ff4d4d;
+}
+
+#paypal-button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.footer {
+    background-color: #333; 
+    color: #fff; 
+    padding: 60px; 
+    text-align: center;
+}
+
+.footer a {
+    color: #ff6b6b; 
+    text-decoration: none; 
+    margin-right: 10px;
+}
+
+.footer a:hover {
+    color: #ff4d4d; 
+}
+
+.footer p {
+    margin-top: 40px;
+    font-size: 1rem;
+}

@@ -29,21 +29,21 @@
   {
     "nombre": "? (Vinyl)",
     "categoria": "Rap",
-    "imagen": "imagenes/Producto5.jpg",
+    "imagen": "imagenes/producto5.jpg",
     "precio": "558.83",
     "descripcion": "Conocido por la honestidad catártica que ha llegado a millones de fanáticos y creyentes, el ? XXXTentacion muestra sus escritos más conmovedores, poderosos y personales hasta la fecha. Él personalmente aporta guitarra y teclados, además de escribir cada canción. El colaborador cercano John Cunningham manejó la mayor parte de la producción y las características incluyen a Travis Barker, Matt Ox, JoeyBada$$ y PnB Rock. Los fanáticos se han hecho cargo ahora y han presentado oficialmente la respuesta de la Generación Z post-millennial a Kurt Cobain."
   },
   {
     "nombre": "Finally Rich - Exclusive Limited Edition Silver & Black Galaxy Colored Vinyl 2LP",
     "categoria": "Hip-Hop",
-    "imagen": "imagenes/Producto6.jpg",
+    "imagen": "imagenes/producto6.jpg",
     "precio": "1879.28",
     "descripcion": "Se recomienda reproducir este disco en un reproductor de alta calidad con funciones anti-patinaje. Otras cosas que puedes intentar para ayudarte a saltar si no puedes ajustar el antipatinaje: Asegúrate de que tu tocadiscos esté perfectamente plano; usa una herramienta niveladora para comprobarlo. Si no puedes aplanarlo simplemente colocándolo, intenta colocarlo. Fichas debajo de las patas del plato giratorio para ajustarlas."
   },
   {
     "nombre": "Playboi Carti [LP]",
     "categoria": "Hip-Hop",
-    "imagen": "imagenes/Producto7.jpg",
+    "imagen": "imagenes/producto7.jpg",
     "precio": "663.00",
     "descripcion": "Proyecto debut tan esperado del joven rapero de Atlanta. Publicado por Interscope Records, incluye Magnolia y Woke Up Like This."
   },
@@ -57,14 +57,14 @@
   {
     "nombre": "Heroes & Villains (Vinyl)",
     "categoria": "Trap/Rap",
-    "imagen": "imagenes/Producto9.jpg",
+    "imagen": "imagenes/producto9.jpg",
     "precio": "560.53",
     "descripcion": "Metro Boomin - Heroes & Villains - Metro Boomin lanzó su esperado álbum cinematográfico HEROES & VILLAINS (a través de Boominati Worldwide/Republic) el 2 de diciembre de 2022. La continuación de su debut de larga duración de 2018, NOT ALL HEROES WEAR CAPES, incluye características de John Legend, Future, Chris Brown, Don Toliver, Travis Scott, 21 Savage, Young Thug, A$AP Rocky, Gunna y el difunto Takeoff. El álbum va acompañado de un cortometraje creado por Gibson Hazard, feat. Morgan Freeman, LaKeith Stanfield, Young Thug y Gunna. Disponible en vinilo el 31 de marzo de 2023."
   },
   {
     "nombre": "Savage Mode II (Vinyl)",
     "categoria": "Hip-Hop",
-    "imagen": "imagenes/Producto10.jpg",
+    "imagen": "imagenes/producto10.jpg",
     "precio": "574.48",
     "descripcion": "Prensado limitado de LP de vinilo de color rojo. Lanzamiento 2021. Savage Mode II es un álbum de estudio colaborativo del rapero 21 Savage, radicado en Atlanta, y el productor discográfico estadounidense Metro Boomin. El álbum sirve como secuela de la obra extendida del dúo Savage Mode (2016). Cuenta con apariciones especiales de Drake, Young Thug y el primo de Savage, Young Nudy. Incluye los sencillos: Runnin y Mr. Right Now."
   }

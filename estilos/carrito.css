@@ -17,7 +17,7 @@ h1 {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    text-align: left;
+    text-align: center;
 }
 
 .navbar {
@@ -115,8 +115,11 @@ button:hover {
 }
 
 #paypal-button-container {
+    display: flex;
+    justify-content: center;
     text-align: center;
     margin-top: 30px;
+    align-items: center;
 }
 
 .footer {
